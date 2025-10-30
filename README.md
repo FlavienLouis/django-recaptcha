@@ -26,8 +26,8 @@
 
 Tested with:
 
-- Python: 3.8, 3.9, 3.10, 3.11
-- Django: 3.2, 4.1, 4.2
+- Python: 3.9, 3.10, 3.11, 3.12, 3.13
+- Django: 4.2, 5.0, 5.1 and 5.2
 - You can view the [Python-Django support matrix
   here](https://docs.djangoproject.com/en/dev/faq/install/#what-python-version-can-i-use-with-django)
 
@@ -187,7 +187,7 @@ captcha = fields.ReCaptchaField(
 By default, the widgets provided only supports a single form with a
 single widget on each page.
 
-The language can be set with the 'h1' parameter, look at [language
+The language can be set with the 'hl' parameter, look at [language
 codes](https://developers.google.com/recaptcha/docs/language) for the
 language code options. Note that translations need to be added to this
 package for the errors to be shown correctly. Currently the package has
@@ -219,16 +219,11 @@ For example:
 RECAPTCHA_REQUIRED_SCORE = 0.85
 ```
 
-For per field, runtime, specification the attribute can also be passed to the widget:
+For per field, runtime, specification the score can also be passed to the widget:
 
 ```python
 captcha = fields.ReCaptchaField(
-    widget=ReCaptchaV3(
-        attrs={
-            'required_score':0.85,
-            ...
-        }
-    )
+    widget=ReCaptchaV3(required_score=0.85)
 )
 ```
 
@@ -273,7 +268,7 @@ SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error']
 
 If you want to mock the call to Google's servers altogether, have a look
 at
-[test_fields.py](https://github.com/django-recaptcha/django-recaptcha/blob/main/captcha/tests/test_fields.py):
+[test_fields.py](https://github.com/django-recaptcha/django-recaptcha/blob/main/django_recaptcha/tests/test_fields.py):
 
 ```python
 from unittest.mock import patch
